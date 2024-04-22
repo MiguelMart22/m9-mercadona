@@ -4,49 +4,32 @@ namespace App\Observers;
 
 use App\Models\Product;
 use App\Events\PriceIncreased;
+use Telegram\Bot\Api;
 
 class ProductObserver
 {
-    /**
-     * Handle the Product "created" event.
-     */
-    public function created(Product $product): void
-    {
-        //
-    }
-
     /**
      * Handle the Product "updated" event.
      */
     public function updated(Product $product)
     {
         if ($product->isDirty('unit_price') && $product->unit_price > $product->getOriginal('unit_price')) {
-            event(new PriceIncreased($product, $product->getOriginal('unit_price'), $product->unit_price));
-            echo "Dd";
+            $this->sendTelegramMessage("El precio del producto '{$product->display_name}' ha aumentado a {$product->unit_price}. - Miguel Martinez");
         }
     }
 
     /**
-     * Handle the Product "deleted" event.
+     * Send a message to Telegram.
      */
-    public function deleted(Product $product): void
+    private function sendTelegramMessage(string $message)
     {
-        //
-    }
+        // Initialize Telegram Bot API
+        $telegram = new Api(config('services.telegram.bot_token'));
 
-    /**
-     * Handle the Product "restored" event.
-     */
-    public function restored(Product $product): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Product "force deleted" event.
-     */
-    public function forceDeleted(Product $product): void
-    {
-        //
+        // Send message to your bot chat
+        $telegram->sendMessage([
+            'chat_id' => config('services.telegram.chat_id'),
+            'text' => $message,
+        ]);
     }
 }
