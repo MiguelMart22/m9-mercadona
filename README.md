@@ -7,7 +7,7 @@ Mercadona Spy és una aplicació que sincronitza dades de productes de la botiga
 1. Clona aquest repositori a la teva màquina local:
 
 ```bash
-git clone https://github.com/tu-usuario/mercadona-spy.git
+git clone https://github.com/MiguelMart22/m9-mercadona.git
 ```
 
 2. Instal·la les dependències del projecte utilitzant Composer:
