@@ -76,7 +76,7 @@ Si vols contribuir a Mercadona Spy, segueix aquests passos:
 
 ## Crèdits
 
-Aquest projecte va ser creat per [el teu nom].
+Aquest projecte va ser creat per Miguel Martinez.
 
 ## Llicència
 
