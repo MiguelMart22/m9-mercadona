@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Observers;
 
 use App\Models\Product;
 use App\Events\PriceIncreased;
-use Telegram\Bot\Api;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ProductObserver
 {
@@ -14,22 +14,25 @@ class ProductObserver
     public function updated(Product $product)
     {
         if ($product->isDirty('unit_price') && $product->unit_price > $product->getOriginal('unit_price')) {
-            $this->sendTelegramMessage("El precio del producto '{$product->display_name}' ha aumentado a {$product->unit_price}. - Miguel Martinez");
+            $this->sendDiscordMessage("El precio del producto '{$product->display_name}' ha aumentado a {$product->unit_price}.\n");
         }
     }
 
     /**
-     * Send a message to Telegram.
+     * Send a message to Discord.
      */
-    private function sendTelegramMessage(string $message)
+    private function sendDiscordMessage(string $message)
     {
-        // Initialize Telegram Bot API
-        $telegram = new Api(config('services.telegram.bot_token'));
+        // Discord Webhook URL
+        $webhookUrl = 'https://discord.com/api/webhooks/1233116426148122868/4L0O9ZU6z7aUAZXkzmTRozqUw5OjEZYGuRbwuyD33RoFh5Yp0ROew43nAOdAeIrPUS7L';
 
-        // Send message to your bot chat
-        $telegram->sendMessage([
-            'chat_id' => config('services.telegram.chat_id'),
-            'text' => $message,
-        ]);
+        // Prepare payload
+        $payload = [
+            'content' => $message,
+        ];
+
+        // Send POST request to Discord webhook
+        $response = Http::post($webhookUrl, $payload);
+
     }
 }
