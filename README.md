@@ -1,6 +1,6 @@
 # Mercadona Spy
 
-Mercadona Spy és una aplicació que sincronitza dades de productes de la botiga en línia de Mercadona utilitzant la seva API i els emmagatzema en una base de dades. A més, proporciona notificacions en temps real sobre pujades de preus a través de Telegram.
+Mercadona Spy és una aplicació que sincronitza dades de productes de la botiga en línia de Mercadona utilitzant la seva API i els emmagatzema en una base de dades. A més, proporciona notificacions en temps real sobre pujades de preus a través de Discord.
 
 ## Instal·lació
 
@@ -16,7 +16,7 @@ git clone https://github.com/MiguelMart22/m9-mercadona.git
 composer install
 ```
 
-3. Copia l'arxiu `.env.example` i reanomena'l a `.env`. Llavors, configura les variables d'entorn necessàries, com la connexió a la base de dades i les credencials de l'API de Telegram.
+3. Copia l'arxiu `.env.example` i reanomena'l a `.env`. Llavors, configura les variables d'entorn necessàries, com la connexió a la base de dades i les credencials de l'API de Discord.
 
 4. Genera una nova clau d'aplicació amb la comanda `php artisan key:generate`.
 
@@ -50,18 +50,18 @@ S'ha automatitzat una tasca que executarà l'actualització dels productes de Me
 php artisan schedule:work
 ```
 
-A més, aquesta tasca està configurada per enviar una notificació per Telegram si hi ha una pujada de preu en algun producte.
+A més, aquesta tasca està configurada per enviar una notificació per Discord si hi ha una pujada de preu en algun producte.
 
-## Configuració de Telegram
+## Configuració de Discord
 
-Per rebre notificacions sobre pujades de preus a través de Telegram, necessites configurar el teu bot de Telegram i obtenir un token de bot i un ID de xat. Llavors, afegeix aquestes credencials a l'arxiu `.env` del teu projecte.
+Per rebre notificacions sobre pujades de preus a través de Discord, necessites configurar el teu bot de Discord i obtenir un token de bot. Llavors, afegeix aquestes id a l'url en el Observer del teu projecte.
 
 ## Dependències
 
-Mercadona Spy utilitza la llibreria oficial del SDK de Telegram Bot per enviar notificacions. Pots instal·lar aquesta dependència utilitzant Composer:
+Mercadona Spy utilitza la llibreria oficial del SDK de Discord Bot per enviar notificacions. Pots instal·lar aquesta dependència utilitzant Composer:
 
 ```bash
-composer require telegram-bot-sdk
+composer require Discord-bot-sdk
 ```
 
 ## Contribució
